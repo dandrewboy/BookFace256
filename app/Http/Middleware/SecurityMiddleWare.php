@@ -68,7 +68,7 @@ class SecurityMiddleWare
             $request->is('apply')
             ){
                 $secureCheck = false;
-        }
+        
         AppLogger::info($secureCheck ? "Security Middleware is handle()...Security Needed" :
             "Security Middleware is handle()...No Security Required");
         
@@ -78,20 +78,7 @@ class SecurityMiddleWare
             AppLogger::info("Leaving Security Middleware and redirecting bakc to login");
             return redirect('/');
         }
-
-        if($request->is('doAdmin') || $request->is('stateChange') || $request->is('deleteUser') || $request->is('addjob') || $request->is('doJob') ||
-            $request->is('doJobPost') || $request->is('doJobEdit') || $request->is('doJobDelete') ) {
-                $secureCheck = false;
-            }
-            AppLogger::info($secureCheck ? "Security Middleware is handle()...Security Needed" :
-                "Security Middleware is handle()...No Security Required");
-            
-            
-            if(session()->get('Role') == "admin" && $secureCheck)
-            {
-                AppLogger::info("Leaving Security Middleware and redirecting bakc to login");
-                return redirect('/');
-            }
+        }
         return $next($request);
     }
 }
