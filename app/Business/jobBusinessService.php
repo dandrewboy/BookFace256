@@ -70,7 +70,7 @@ class jobBusinessService
         
         $ser = new jobDataService($db);
         $ser->findJobById($id);
-        $ser->updateJob($job->getCompany(), $job->getPosition(), $job->getPosition(), $id);
+        $ser->updateJob($job->getCompany(), $job->getPosition(), $job->getDescription(), $id);
         
         //Close connection to the database
         $db = null;

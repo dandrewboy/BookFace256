@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Exception;
 use App\Models;
@@ -54,6 +55,7 @@ class LoginController extends Controller
             \Session([
                 'Lastname' => $user->getLastname()
             ]);
+            
             \Session([
                 'Role' => $user->getRole()
             ]);

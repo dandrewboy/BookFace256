@@ -103,6 +103,41 @@ class CommunityController extends Controller
     }
     
     /**
+     * Method for allowing a user to edit an Affinity Group
+     * @param Request $request
+     */
+    
+    public function onEditGroup(Request $request) {
+        /*
+         * Create a new instance of AffinityGroupModel and use user provider information to fill out the variables. Then make a new
+         * instance of CommunityBusinessService to call the addGroup method passing the AfinittyGroupModel to the business service
+         */
+        try {
+            AppLogger::info("Entering CommunityController.onEditGroup()");
+            $group = new AffinityGroupModel();
+            $group->setName($request->input('name'));
+            $group->setDiscription($request->input('description'));
+            $id = $request->input('id');
+            AppLogger::info("Leaving CommunityController to CommunityBusinessService.addGroup()");
+            $ser = new CommunityBusinessService();
+            $ser->editGroup($group, $id);
+            AppLogger::info("Exiting CommunityController");
+            return View('welcome');
+        }
+        catch(CommunityException $e1)
+        {
+            throw $e1;
+        }
+        catch(Exception $e2)
+        {
+            AppLogger::error("Exception: ", array("message" => $e2->getMessage()));
+            throw new CommunityException("Database Exception: " . $e2->getMessage(), 0, $e2);
+        }
+        
+        
+    }
+    
+    /**
      * Method for allowing a user to join an exsisting Affinity Group
      * @param Request $request
      */
@@ -228,5 +263,11 @@ class CommunityController extends Controller
             throw new CommunityException("Database Exception: " . $e2->getMessage(), 0, $e2);
         }
        
+        }
+        
+        public function onGroupPass(Request $request) {
+            $id = $request->input('id');
+            $data = ['id' => $id];
+            return View('EditGroup')->with($data);
         }
 }

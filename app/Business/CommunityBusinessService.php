@@ -107,6 +107,34 @@ class CommunityBusinessService
     }
     
     /**
+     * Processes a request to edit a group in the databse
+     * @param
+     */
+    function editGroup(AffinityGroupModel $group, $id)
+    {
+        /*
+         * Create a new instance of CommunityDataService to call the updateGroup method to add a new group to the database.
+         */
+        AppLogger::info("Entering CommunityBusinessService.editGroup()");
+        $servername = Database::$dbservername;
+        $username = Database::$dbusername;
+        $password = Database::$dbpassword;
+        $dbname = Database::$dbname;
+        
+        //Get connection to the database
+        $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $cds = new CommunityDataService($db);
+        AppLogger::info("Leaving CommunityBusinessService to CommunityDataService.updateGroup()");
+        $cds->updateGroup($group->getName(), $group->getDiscription(), $id);
+        
+        AppLogger::info("Exiting CommunityBussinessService");
+        $db = null;
+        
+    }
+    
+    /**
      * Processes a request to delete a group in the databse
      * @param
      */

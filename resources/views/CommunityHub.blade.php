@@ -11,6 +11,7 @@
 <td>Join/Leave</td>
 <td>View Group</td>
 <td>Delete</td>
+<td>Edit</td>
 </tr>
 @foreach ($groupArray as $group)
 <tr>
@@ -40,6 +41,12 @@
 <form method="post" action="doDeleteGroup">
 {{csrf_field()}}<input type="hidden" value="{{$group['GROUPID']}}" name="id"></input>
 <button class="btn btn-primary" type="submit">Delete</button>
+</form>
+</td>
+<td>
+<form method="post" action="doGroupPass">
+{{csrf_field()}}<input type="hidden" value="{{$group['GROUPID']}}" name="id"></input>
+<button class="btn btn-primary" type="submit">Edit</button>
 </form>
 </td>
 @endif

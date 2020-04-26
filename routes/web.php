@@ -38,6 +38,9 @@ Route::get('/', function () {
                             Route::get('/addgroup', function() {
                                 return view('AddGroup');
                             });
+                                Route::get('/editgroup', function() {
+                                    return view('EditGroup');
+                                });
                                 Route::get('/community', function() {
                                     return view('CommunityHub');
                                 });
@@ -82,7 +85,9 @@ Route::post('doJobPost', 'JobController@onJobPost');
 Route::post('doJobEdit', 'JobController@onJobEdit');
 Route::post('doJobDelete', 'JobController@onJobDelete');
 Route::post('doJobPass', 'JobController@onJobPass');
+Route::post('doGroupPass', 'CommunityController@onGroupPass');
 Route::post('doAddGroup', 'CommunityController@onAddGroup');
+Route::post('doEditGroup', 'CommunityController@onEditGroup');
 Route::get('doCommunityHub', 'CommunityController@onCommunityHub');
 Route::post('doDeleteGroup', 'CommunityController@onDeleteGroup');
 Route::post('doJoinGroup', 'CommunityController@onJoinGroup');

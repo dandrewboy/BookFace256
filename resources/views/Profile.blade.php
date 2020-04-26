@@ -49,7 +49,6 @@
 <td>{{$jobHistory->getCompany()}}</td>
 <td>{{$jobHistory->getDate()}}</td>
 <td>
-<td>
 <form method = "post" action="doJobHistoryPass">
 {{csrf_field()}}<input type="hidden" value="{{$jobHistory->getHistoryID()}}" name="id"></input>
 <button class="btn btn-primary" type="submit" value="active">Edit</button>
@@ -61,7 +60,6 @@
 <button class="btn btn-primary" type="submit" value="delete">Delete</button>
 </form>
 </td>
-<td></td>
 </tr>
 @endforeach
 </tbody>
@@ -88,7 +86,6 @@
 <td>{{$edu->getLevel()}}</td>
 <td>{{$edu->getDate()}}</td>
 <td>
-<td>
 <form method = "post" action="doEducationPass">
 {{csrf_field()}}<input type="hidden" value="{{$edu->getEducationID()}}" name="id"></input>
 <button class="btn btn-primary" type="submit" value="active">Edit</button>
@@ -100,7 +97,6 @@
 <button class="btn btn-primary" type="submit" value="delete">Delete</button>
 </form>
 </td>
-<td></td>
 </tr>
 @endforeach
 </tbody>
@@ -126,7 +122,6 @@
 <td>{{$skill->getTitle()}}</td>
 <td>{{$skill->getDescription()}}</td>
 <td>
-<td>
 <form method = "post" action="doSkillPass">
 {{csrf_field()}}<input type="hidden" value="{{$skill->getSkillID()}}" name="id"></input>
 <button class="btn btn-primary" type="submit" value="active">Edit</button>
@@ -138,7 +133,6 @@
 <button class="btn btn-primary" type="submit" value="delete">Delete</button>
 </form>
 </td>
-<td></td>
 </tr>
 @endforeach
 </tbody>

@@ -29,6 +29,7 @@ class SecurityMiddleWare
             $request->is('onProfile') ||
             $request->is('doProEdit') ||
             $request->is('editpro') ||
+            $request->is('editgroup') ||
             $request->is('doJobHistoryPass') ||
             $request->is('doEducationPass') ||
             $request->is('doSkillPass') ||
@@ -39,7 +40,9 @@ class SecurityMiddleWare
             $request->is('community') ||
             $request->is('pro') ||
             $request->is('doJobPass') ||
+            $request->is('doGroupPass') ||
             $request->is('doAddGroup') ||
+            $request->is('doEditGroup') ||
             $request->is('doCommunityHub') ||
             $request->is('doDeleteGroup') ||
             $request->is('doJoinGroup') ||
@@ -66,10 +69,6 @@ class SecurityMiddleWare
             ){
                 $secureCheck = false;
         }
-        if($request->is('doAdmin') || $request->is('stateChange') || $request->is('deleteUser') || $request->is('doJob') ||
-            $request->is('doJobPost') || $request->is('doJobEdit') || $request->is('doJobDelete') && $request->session->get('Role') == "admin") {
-                $secureCheck = false;
-            }
         AppLogger::info($secureCheck ? "Security Middleware is handle()...Security Needed" :
             "Security Middleware is handle()...No Security Required");
         
@@ -79,6 +78,20 @@ class SecurityMiddleWare
             AppLogger::info("Leaving Security Middleware and redirecting bakc to login");
             return redirect('/');
         }
+
+        if($request->is('doAdmin') || $request->is('stateChange') || $request->is('deleteUser') || $request->is('addjob') || $request->is('doJob') ||
+            $request->is('doJobPost') || $request->is('doJobEdit') || $request->is('doJobDelete') ) {
+                $secureCheck = false;
+            }
+            AppLogger::info($secureCheck ? "Security Middleware is handle()...Security Needed" :
+                "Security Middleware is handle()...No Security Required");
+            
+            
+            if(session()->get('Role') == "admin" && $secureCheck)
+            {
+                AppLogger::info("Leaving Security Middleware and redirecting bakc to login");
+                return redirect('/');
+            }
         return $next($request);
     }
 }

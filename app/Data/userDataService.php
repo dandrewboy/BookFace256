@@ -414,7 +414,7 @@ public function findEducationById($id) {
             
             $index = 0;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $edu = new EducationModel($row["SCHOOL"], $row["LEVEL"], $row["DATE"]);
+                $edu = new EducationModel($row["EDUCATIONID"],$row["SCHOOL"], $row["LEVEL"], $row["DATE"], $row["user_userID"]);
                 $eduArray[$index++] = $edu;
             }
             AppLogger::info("Leaving findEducationByIdRest() with an array of education of a user");
@@ -519,7 +519,7 @@ public function findSkillsById($id) {
             
             $index = 0;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $skill = new SkillModel($row["SCHOOL"], $row["LEVEL"], $row["DATE"]);
+                $skill = new SkillModel($row["SKILLID"],$row["TITLE"], $row["DESCRIPTION"], $row["user_userID"]);
                 $skillArray[$index++] = $skill;
             }
             AppLogger::info("Leaving findSkillByIdRest() with an array of skills of a user");

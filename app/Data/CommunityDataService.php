@@ -77,6 +77,35 @@ class CommunityDataService
     }
     
     /**
+     * creates a new group and adds it to the database
+     * @param String $company, String $position, String $description
+     */
+    public function updateGroup($name, $descrption, $id)
+    {
+        /*
+         * Using an INSERT SQL Statement int he groups table to create a new group
+         */
+        try {
+            AppLogger::info("Entering CommunityDataService.updateGroup()");
+            AppLogger::info("Preparing SQL Statement");
+            $stmt = $this->db->prepare("UPDATE `groups` SET `NAME` = :name, `DISCRIPTION` = :description 
+                                        WHERE `GROUPID`= :id");
+            $stmt->bindParam(":name", $name);
+            $stmt->bindParam(":description", $descrption);
+            $stmt->bindParam(":id", $id);
+            AppLogger::info("Executing SQL Statemet");
+            $stmt->execute();
+            AppLogger::info("Leaving CommunityDataService");
+        }
+        catch(PDOException $e)
+        {
+            AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+            
+        }
+    }
+    
+    /**
      * deletes a group and adds it to the database
      * @param String $company, String $position, String $description
      */

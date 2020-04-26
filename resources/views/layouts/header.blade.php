@@ -1,3 +1,3 @@
 <div align="center">
-		<h2>Welcom to BookFace</h2>
+		<h2>Welcome to BookFace</h2>
 </div>
