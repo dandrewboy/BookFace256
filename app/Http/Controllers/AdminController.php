@@ -98,6 +98,9 @@ class AdminController extends Controller
             AppLogger::info("Leaving AdminController to adminService.delete()");
             $csec->leaveGroup($userID);
             $psec->removeProfile($userID);
+            $psec->removeAllJobHistory($userID);
+            $psec->removeAllEducation($userID);
+            $psec->removeAllSkills($userID);
             $sec->delete($userID);
             AppLogger::info("Exiting AdminController");
             return view('welcome');

@@ -166,6 +166,26 @@ class ProfileController extends Controller
         }
     }
     
+    public function onDeleteAllJobHistory(Request $request) {
+        /*
+         * Creating a new instance of the profileService we make a request to delete a skill entry from the database.
+         */
+        try{
+            AppLogger::info("Entering ProfileController.onDeleteAllJobHistory()");
+            $id = Session::get('UserID');
+            $pros = new profileService();
+            $pros->removeAllJobHistory($id);
+            
+            AppLogger::info("Exiting onDeleteSkill()");
+            return View('welcome');
+        }
+        catch(ProfileException $e)
+        {
+            AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+            throw new ProfileException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
+    }
+    
     public function onJobHistoryPass(Request $request) {
         $id = $request->input('id');
         $data = ['id' => $id];
@@ -247,6 +267,26 @@ class ProfileController extends Controller
         return View('EditEducation')->with($data);
     }
     
+    public function onDeleteAllEducation(Request $request) {
+        /*
+         * Creating a new instance of the profileService we make a request to delete a skill entry from the database.
+         */
+        try{
+            AppLogger::info("Entering ProfileController.onDeleteAllEducation()");
+            $id = Session::get('UserID');
+            $pros = new profileService();
+            $pros->removeAllEducation($id);
+            
+            AppLogger::info("Exiting onDeleteSkill()");
+            return View('welcome');
+        }
+        catch(ProfileException $e)
+        {
+            AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+            throw new ProfileException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
+    }
+    
     public function onAddSkill(Request $request) {
         /*
          * Creating a new instance of the profileService we make a request to populate a new Skill Model with user inputed data
@@ -303,6 +343,26 @@ class ProfileController extends Controller
             $id = $request->input('id');
             $pros = new profileService();
             $pros->removeSkill($id);
+            
+            AppLogger::info("Exiting onDeleteSkill()");
+            return View('welcome');
+        }
+        catch(ProfileException $e)
+        {
+            AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+            throw new ProfileException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
+    }
+    
+    public function onDeleteAllSkills(Request $request) {
+        /*
+         * Creating a new instance of the profileService we make a request to delete a skill entry from the database.
+         */
+        try{
+            AppLogger::info("Entering ProfileController.onDeleteAllSkills()");
+            $id = Session::get('UserID');
+            $pros = new profileService();
+            $pros->removeAllSkills($id);
             
             AppLogger::info("Exiting onDeleteSkill()");
             return View('welcome');

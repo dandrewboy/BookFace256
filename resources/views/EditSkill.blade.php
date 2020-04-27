@@ -9,7 +9,7 @@
 <br>
 {{csrf_field()}}<input type="hidden" value="{{$id}}" name="id"></input>
 Title: <br>
-<input type="text" name="Title" maxlength="10"><br><br>
+<input type="text" name="Title" maxlength="20"><br><br>
 Description: <br>
 <input type="text" name="Description" maxlength="250"><br><br>
 <button type="submit">Edit Skill</button>

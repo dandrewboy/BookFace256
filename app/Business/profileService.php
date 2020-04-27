@@ -293,6 +293,32 @@ class profileService
     $db = null;
     }
     
+    public function removeAllJobHistory($id){
+        /*
+         * Create a new instance of the userDataService and call the method deleteJobHistory(). This allows either the user of the
+         * account to remove an entry in their job history
+         */
+        AppLogger::info("Entering profileService.removeAllJobHisroty");
+        $servername = Database::$dbservername;
+        $username = Database::$dbusername;
+        $password = Database::$dbpassword;
+        $dbname = Database::$dbname;
+        
+        //Get connection to the database
+        $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Create a new instance of the userDataService to call the findProfilebyId method
+        AppLogger::info("Leaving profileService to call deleteJobHistory() at userDataService");
+        $uds = new userDataService($db);
+        $uds->deleteAllJobHistory($id);
+        
+        
+        //Close connection to the database
+        AppLogger::info("Exiting profileService");
+        $db = null;
+    }
+    
     public function getEducation($id) {
         /*
          * Handles a request from the presentation layer to retrive a users education and send it back to the presentation layer.
@@ -400,6 +426,32 @@ class profileService
         AppLogger::info("Exiting profileService");
         $db = null;
     }
+    public function removeAllEducation($id){
+        /*
+         * Create a new instance of the userDataService and call the method deleteJobHistory(). This allows either the user of the
+         * account to remove an entry in their job history
+         */
+        AppLogger::info("Entering profileService.removeAllEducation");
+        $servername = Database::$dbservername;
+        $username = Database::$dbusername;
+        $password = Database::$dbpassword;
+        $dbname = Database::$dbname;
+        
+        //Get connection to the database
+        $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Create a new instance of the userDataService to call the findProfilebyId method
+        AppLogger::info("Leaving profileService to call deleteJobHistory() at userDataService");
+        $uds = new userDataService($db);
+        $uds->deleteAllEducation($id);
+        
+        
+        //Close connection to the database
+        AppLogger::info("Exiting profileService");
+        $db = null;
+    }
+    
     
     public function getSkills($id) {
         /*
@@ -507,5 +559,31 @@ class profileService
         AppLogger::info("Exiting profileService");
         $db = null;
     }
+    public function removeAllSkills($id){
+        /*
+         * Create a new instance of the userDataService and call the method deleteJobHistory(). This allows either the user of the
+         * account to remove an entry in their job history
+         */
+        AppLogger::info("Entering profileService.removeAllSkills");
+        $servername = Database::$dbservername;
+        $username = Database::$dbusername;
+        $password = Database::$dbpassword;
+        $dbname = Database::$dbname;
+        
+        //Get connection to the database
+        $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Create a new instance of the userDataService to call the findProfilebyId method
+        AppLogger::info("Leaving profileService to call deleteJobHistory() at userDataService");
+        $uds = new userDataService($db);
+        $uds->deleteAllSkills($id);
+        
+        
+        //Close connection to the database
+        AppLogger::info("Exiting profileService");
+        $db = null;
+    }
+    
 }
 

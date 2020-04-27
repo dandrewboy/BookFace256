@@ -121,7 +121,7 @@ class userDataService
         // with the user provided data
         AppLogger::info("Entering userDataService.updateProfile()");
         AppLogger::info("Preparing SQL Statement");
-        $stmt =$this->db->prepare("UPDATE `profile` SET `email` = :email,`phonenumber` = :phonenumber WHERE `user_userID`= :id");
+        $stmt =$this->db->prepare("UPDATE `profile` SET `email` = :email,`phonenumber` = :phonenumber WHERE `profileID`= :id");
                 
                 $stmt->bindParam(":email", $em);
                 $stmt->bindParam(":phonenumber", $pn);
@@ -394,6 +394,29 @@ public function deleteJobHistory($id) {
     }
 }
 
+public function deleteAllJobHistory($id) {
+    /*
+     * Using the DELETE SQL Statement the user can delete a job history entry they submitted based off of the entries history id number.
+     */
+    try {
+        AppLogger::info("Entering userDataService.deleteAllJobHistory()");
+        AppLogger::info("Preparing SQL Statement");
+        $stmt = $this->db->prepare("DELETE FROM `jobhistory` WHERE `user_userID` = :id");
+        
+        $stmt->bindParam(":id", $id);
+        
+        AppLogger::info("Executing SQL Statement");
+        $stmt->execute();
+        AppLogger::info("Exiting deleteAllJobHistory()");
+    }
+    catch(PDOException $e)
+    {
+        AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+        throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        
+    }
+}
+
 
 public function findEducationById($id) {
     /*
@@ -499,6 +522,28 @@ public function deleteEducation($id) {
     }
 }
 
+public function deleteAllEducation($id) {
+    /*
+     * Using the DELETE SQL Statement the user can delete a education entry they submitted based off of the entries history id number.
+     */
+    try {
+        AppLogger::info("Entering userDataService.deleteAllEducation()");
+        AppLogger::info("Preparing SQL Statement");
+        $stmt = $this->db->prepare("DELETE FROM `education` WHERE `user_userID` = :id");
+        
+        $stmt->bindParam(":id", $id);
+        
+        AppLogger::info("Executing SQL Statement");
+        $stmt->execute();
+        AppLogger::info("Exiting deleteAllEducation()");
+    }
+    catch(PDOException $e)
+    {
+        AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+        throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        
+    }
+}
 
 public function findSkillsById($id) {
     /*
@@ -595,6 +640,29 @@ public function deleteSkill($id) {
         AppLogger::info("Executing SQL Statement");
         $stmt->execute();
         AppLogger::info("Exiting deleteSkill()");
+    }
+    catch(PDOException $e)
+    {
+        AppLogger::error("Exception: ", array("message: " => $e->getMessage()));
+        throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        
+    }
+}
+
+public function deleteAllSkills($id) {
+    /*
+     * Using the DELETE SQL Statement the user can delete a skill entry they submitted based off of the entries history id number.
+     */
+    try {
+        AppLogger::info("Entering userDataService.deleteAllSkills()");
+        AppLogger::info("Preparing SQL Statement");
+        $stmt = $this->db->prepare("DELETE FROM `skills` WHERE `user_userID` = :id");
+        
+        $stmt->bindParam(":id", $id);
+        
+        AppLogger::info("Executing SQL Statement");
+        $stmt->execute();
+        AppLogger::info("Exiting deleteAllSkills()");
     }
     catch(PDOException $e)
     {

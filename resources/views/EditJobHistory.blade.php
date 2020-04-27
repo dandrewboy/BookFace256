@@ -9,7 +9,7 @@
 <br>
 {{csrf_field()}}<input type="hidden" value="{{$id}}" name="id"></input>
 Title: <br>
-<input type="text" name="Title" maxlength="10"><br><br>
+<input type="text" name="Title" maxlength="30"><br><br>
 Company: <br>
 <input type="text" name="Company" maxlength="20"><br><br>
 Date: <br>
